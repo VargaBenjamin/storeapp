@@ -25,7 +25,7 @@ class ProductItem
         $this->quantity = $quantity;
     }
 
-    public function getProduct()
+    public function getProduct() : Product
     {
         return $this->product;
     }

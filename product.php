@@ -25,7 +25,7 @@ abstract class Product
         self::$id++;
     }
 
-    public function getSpaceRequirement()
+    public function getSpaceRequirement() : int
     {
         return $this->spaceRequirement;
     }
