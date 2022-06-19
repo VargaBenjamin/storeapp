@@ -9,14 +9,29 @@ class ProductItem
     protected Product $product;
     protected int $quantity;
 
-    public function __construct(Product $product, int $quantity) {
+    public function __construct(Product $product, int $quantity)
+    {
         $this->product = $product;
         $this->quantity = $quantity;
     }
 
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
     public function printAll()
     {
-        echo 'Termék: <br>';
         $this->product->printAll();
         echo 'quantity = ' . $this->quantity . '<br><br>';
     }

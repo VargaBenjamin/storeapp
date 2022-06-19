@@ -8,7 +8,7 @@ require_once './car.php';
 require_once './book.php';
 
 $eastStorage = new Storage('East Storage', 20);
-$westStorage = new Storage('West Storage', 15);
+$westStorage = new Storage('West Storage', 20);
 
 $samsungBrand = new Brand('Samsung', 5);
 $fordBrand = new Brand('Ford', 4);
@@ -22,6 +22,11 @@ $samsungItems = new ProductItem($neoQled, 10);
 $fordItems = new ProductItem($fairlane, 1);
 $HKItems = new ProductItem($harcosokKlubja, 15);
 
-$samsungItems->printAll();
-
-
+try {
+    StorageDirector::addProductItemToStorage($HKItems, $eastStorage);
+    StorageDirector::addProductItemToStorage($samsungItems, $eastStorage);
+} catch (Exception $e) {
+    echo 'Hiba=> ' . $e->getMessage();
+} finally {
+    StorageDirector::printAll();
+}

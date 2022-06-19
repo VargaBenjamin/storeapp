@@ -1,19 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 require_once './brand.php';
 
 abstract class Product
 {
-    private static int $id=0;
+    private static int $id = 0;
     protected int $productID;
     protected string $productName;
     protected int $price;
     protected Brand $brand;
     protected int $articleNumber;
-    protected int $space_requirement;
+    protected int $spaceRequirement;
 
-    public function __construct(string $productName, int $price, Brand $brand, int $articleNumber, int $spaceRequirement) {
+    public function __construct(string $productName, int $price, Brand $brand, int $articleNumber, int $spaceRequirement)
+    {
         $this->productName = $productName;
         $this->price = $price;
         $this->brand = $brand;
@@ -23,9 +25,9 @@ abstract class Product
         self::$id++;
     }
 
-    public function getBrand() :Brand
+    public function getSpaceRequirement()
     {
-        return $this->brand;
+        return $this->spaceRequirement;
     }
 
     public function printAll()
