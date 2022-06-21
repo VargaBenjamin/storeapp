@@ -36,6 +36,9 @@ class Storage
 
     public function addProduct(ProductItem $item): ProductItem | null
     {
+        if (empty($item)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
         if ($this->capacity > 0) {
             $quantity = $item->getQuantity();
             $space = $item->getProduct()->getSpaceRequirement();
@@ -60,5 +63,30 @@ class Storage
         } else {
             return $item;
         }
+    }
+
+    public function removeProduct(ProductItem $item): ProductItem | null
+    {
+        if (empty($item)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
+        for ($i = 0; $i < count($this->stock); $i++) {
+            if ($this->stock[$i]->getProduct()->getProductName() === $item->getProduct()->getProductName()) {
+                $stockItemQuantity = $this->stock[$i]->getQuantity();
+                $itemQuantity = $item->getQuantity();
+                if ($stockItemQuantity > $itemQuantity) {
+                    $this->stock[$i]->setQuantity($stockItemQuantity - $itemQuantity);
+                    return null;
+                } elseif ($stockItemQuantity === $itemQuantity) {
+                    unset($this->stock[$i]);
+                    return null;
+                } else {
+                    unset($this->stock[$i]);
+                    $item->setQuantity($itemQuantity - $stockItemQuantity);
+                    return $item;
+                }
+            }
+        }
+        return $item;
     }
 }

@@ -11,6 +11,9 @@ class StorageDirector
 
     public static function addStorage(Storage $storage)
     {
+        if (empty($storage)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
         array_push(self::$storages, $storage);
     }
 
@@ -21,21 +24,48 @@ class StorageDirector
 
     private static function printStorage(Storage $storage)
     {
+        if (empty($storage)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
         $storage->printAll();
     }
 
     public static function addProductItemToStorage(ProductItem $item, Storage $storage)
     {
-        $result = $storage->addProduct($item);
+        if (empty($item) || empty($storage)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
+        $clonedItem = clone ($item);
+        $result = $storage->addProduct($clonedItem);
         $count = count(self::$storages);
         $i = 0;
         if ($result != null) {
             while ($result != null && $i < $count) {
-                $result = self::$storages[$i]->addProduct($item);
+                $result = self::$storages[$i]->addProduct($clonedItem);
                 $i++;
             }
             if ($result != null) {
                 throw new Exception('Beillesztés: Nem sikerült mindegyik darabot elhelyezni a raktárakban!', 1);
+            }
+        }
+    }
+
+    public static function removeProductItemFromStorage(ProductItem $item, Storage $storage)
+    {
+        if (empty($item) || empty($storage)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
+        $clonedItem = clone ($item);
+        $result = $storage->removeProduct($clonedItem);
+        $count = count(self::$storages);
+        $i = 0;
+        if ($result != null) {
+            while ($result != null && $i < $count) {
+                $result = self::$storages[$i]->removeProduct($clonedItem);
+                $i++;
+            }
+            if ($result != null) {
+                throw new Exception('Kivétel: Nem sikerült mindegyik darabot kivenni a raktárakból!', 1);
             }
         }
     }
