@@ -22,14 +22,14 @@ class Storage
         StorageDirector::addStorage($this);
     }
 
-    public function printAll()
+    public function printAll(): void
     {
+        echo '-------------<br>';
         echo 'Raktár név = ' . $this->storageName . '<br>';
         array_map('self::printProduct', $this->stock);
-        echo '<br>';
     }
 
-    private function printProduct(ProductItem $item)
+    private function printProduct(ProductItem $item): void
     {
         $item->printAll();
     }

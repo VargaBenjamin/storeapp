@@ -23,13 +23,38 @@ try {
     $samsungItems2 = new ProductItem($neoQled, 9);
     $fordItems = new ProductItem($fairlane, 1);
     $HKItems = new ProductItem($harcosokKlubja, 15);
+} catch (Exception $e) {
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
+}
 
-
+try {
     StorageDirector::addProductItemToStorage($HKItems, $eastStorage);
+} catch (Exception $e) {
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
+}
+
+try {
     StorageDirector::addProductItemToStorage($samsungItems, $eastStorage);
+} catch (Exception $e) {
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
+}
+
+try {
+    StorageDirector::addProductItemToStorage($fordItems, $westStorage);
+} catch (Exception $e) {
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
+}
+
+try {
     StorageDirector::removeProductItemFromStorage($samsungItems2, $eastStorage);
 } catch (Exception $e) {
-    echo 'Hiba=> ' . $e->getMessage();
-} finally {
-    StorageDirector::printAll();
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
 }
+
+try {
+    StorageDirector::removeProductItemFromStorage($fordItems, $eastStorage);
+} catch (Exception $e) {
+    echo '**<br>Hiba=> ' . $e->getMessage() . '<br>**<br>';
+}
+
+StorageDirector::printAll();

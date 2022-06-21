@@ -9,7 +9,7 @@ class StorageDirector
 {
     public static array $storages = [];
 
-    public static function addStorage(Storage $storage)
+    public static function addStorage(Storage $storage): void
     {
         if (empty($storage)) {
             throw new Exception('Helytelen beviteli érték.', 1);
@@ -17,12 +17,12 @@ class StorageDirector
         array_push(self::$storages, $storage);
     }
 
-    public static function printAll()
+    public static function printAll(): void
     {
         array_map('self::printStorage', self::$storages);
     }
 
-    private static function printStorage(Storage $storage)
+    private static function printStorage(Storage $storage): void
     {
         if (empty($storage)) {
             throw new Exception('Helytelen beviteli érték.', 1);
@@ -30,7 +30,7 @@ class StorageDirector
         $storage->printAll();
     }
 
-    public static function addProductItemToStorage(ProductItem $item, Storage $storage)
+    public static function addProductItemToStorage(ProductItem $item, Storage $storage): void
     {
         if (empty($item) || empty($storage)) {
             throw new Exception('Helytelen beviteli érték.', 1);
@@ -45,12 +45,12 @@ class StorageDirector
                 $i++;
             }
             if ($result != null) {
-                throw new Exception('Beillesztés: Nem sikerült mindegyik darabot elhelyezni a raktárakban!', 1);
+                throw new Exception('Beillesztés: Nem sikerült mindegyik darabot elhelyezni a raktárakban! Maradt: ' . $clonedItem->getQuantity() . ' db ' . $clonedItem->getProduct()->getProductName() . ' (' . $clonedItem->getProduct()->getBrand()->getBrandName() . ')', 1);
             }
         }
     }
 
-    public static function removeProductItemFromStorage(ProductItem $item, Storage $storage)
+    public static function removeProductItemFromStorage(ProductItem $item, Storage $storage): void
     {
         if (empty($item) || empty($storage)) {
             throw new Exception('Helytelen beviteli érték.', 1);
@@ -65,7 +65,7 @@ class StorageDirector
                 $i++;
             }
             if ($result != null) {
-                throw new Exception('Kivétel: Nem sikerült mindegyik darabot kivenni a raktárakból!', 1);
+                throw new Exception('Kivétel: Nem sikerült mindegyik darabot kivenni a raktárakból! Maradt: ' . $clonedItem->getQuantity() . ' db ' . $clonedItem->getProduct()->getProductName() . ' (' . $clonedItem->getProduct()->getBrand()->getBrandName() . ')', 1);
             }
         }
     }
