@@ -20,7 +20,7 @@ class ProductItem
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): void
     {
         if (!is_integer($quantity)) {
             throw new Exception('Helytelen beviteli érték.', 1);
@@ -28,12 +28,12 @@ class ProductItem
         $this->quantity = $quantity;
     }
 
-    public function getProduct() : Product
+    public function getProduct(): Product
     {
         return $this->product;
     }
 
-    public function printAll()
+    public function printAll(): void
     {
         $this->product->printAll();
         echo 'quantity = ' . $this->quantity . '<br><br>';

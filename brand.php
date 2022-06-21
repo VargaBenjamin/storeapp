@@ -17,10 +17,15 @@ class Brand
         self::$id++;
     }
 
-    public function printAll()
+    public function printAll(): void
     {
         foreach ($this as $key => $value) {
             echo $key . ' = ' . $value . '<br>';
         }
+    }
+
+    public function getBrandName(): string
+    {
+        return $this->brandName;
     }
 }

@@ -25,12 +25,12 @@ abstract class Product
         self::$id++;
     }
 
-    public function getSpaceRequirement() : int
+    public function getSpaceRequirement(): int
     {
         return $this->spaceRequirement;
     }
 
-    public function printAll()
+    public function printAll(): void
     {
         foreach ($this as $key => $value) {
             if ($key === 'brand') {
@@ -41,8 +41,13 @@ abstract class Product
         }
     }
 
-    public function getProductName()
+    public function getProductName(): string
     {
         return $this->productName;
+    }
+
+    public function getBrand(): Brand
+    {
+        return $this->brand;
     }
 }
