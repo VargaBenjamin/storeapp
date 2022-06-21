@@ -20,8 +20,11 @@ class ProductItem
         return $this->quantity;
     }
 
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity)
     {
+        if (!is_integer($quantity)) {
+            throw new Exception('Helytelen beviteli érték.', 1);
+        }
         $this->quantity = $quantity;
     }
 
