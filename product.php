@@ -40,4 +40,9 @@ abstract class Product
             }
         }
     }
+
+    public function getProductName()
+    {
+        return $this->productName;
+    }
 }
